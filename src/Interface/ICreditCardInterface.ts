@@ -1,8 +1,10 @@
-interface ICreditCard{
+import { Brand } from "../controller/creditCard/Brand";
+
+interface ICreditCardRequest{
     id?: string;
     number: string;
     name: string;
-    brand?: string;
+    brand?: Brand;
     securityCode: string;
 }
-export{ICreditCard}
+export{ICreditCardRequest}

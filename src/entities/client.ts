@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateC
 import{v4 as uuid} from "uuid";
 import { CreditCard} from './creditCard'
 import { Address } from "./address";
+import { Gender } from "../controller/client/Gender";
 
 @Entity("client")
 class Client{
@@ -17,8 +18,11 @@ class Client{
     @Column()
     cpf!: string;
 
-    @Column()
-    gender!: string;
+    @Column({
+        type: "enum",
+        enum: Gender,
+    })
+    gender!: Gender;
 
     @Column()
     phone!: string;

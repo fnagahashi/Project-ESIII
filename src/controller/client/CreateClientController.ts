@@ -3,7 +3,17 @@ import { CreateClientService } from "../../service/Client/CreateClientService";
 
 class CreateClientController {
   async handle(request: Request, response: Response) {
-    const { name, tel, email, endereco, bairro, cidade, uf } = request.body;
+    const { name,
+      dateBirth,
+      cpf,
+      gender,
+      typePhone,
+      phone,
+      email,
+      password,
+      address,
+      creditCard,
+      obs, } = request.body;
     const createClientService = new CreateClientService();
    const client = await createClientService.execute(
    {
@@ -11,22 +21,13 @@ class CreateClientController {
       dateBirth,
       cpf,
       gender,
+      typePhone,
       phone,
       email,
-    password,
-    typeResidence,
-    typeAddress,
-    residentialAddress,
-    paymentAddress,
-    deliveryAddress,
-    neighborhood,
-    cep,
-    number,
-    city,
-    state,
-    country,
-    creditCard: 
-    obs
+      password,
+      address,
+      creditCard,
+      obs,
     });
     response.json({message:"Cliente cadastrado!"});
   }

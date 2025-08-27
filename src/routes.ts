@@ -9,10 +9,10 @@ import { UpdateSalesController } from "./controller/sales/UpdateSalesController"
 import { ListSalesController } from "./controller/sales/ListSalesController";
 import { CreateSalesController } from "./controller/sales/CreateSalesController";
 
-import { CreateProductController } from "./controller/product/CreateProductController";
-import { ListProductController } from "./controller/product/ListProductController";
-import { UpdateProductController } from "./controller/product/UpdateProductController";
-import { DeleteProductController } from "./controller/product/DeleteProductController";
+import { CreateProductController } from "./controller/books/CreateProductController";
+import { ListProductController } from "./controller/books/ListProductController";
+import { UpdateProductController } from "./controller/books/UpdateProductController";
+import { DeleteProductController } from "./controller/books/DeleteProductController";
 
 import { CreateClientController } from "./controller/client/CreateClientController";
 import { ListClientController } from "./controller/client/ListClientController";
@@ -30,10 +30,10 @@ import { AutenticationController } from "./controller/Autentication/Autenticatio
 
 import { ensureAuthenticated } from "./midleware/ensureAuthenticated";
 
-import { CreatedogController } from "./controller/dog/CreatedogController";
-import { ListdogController } from "./controller/dog/ListdogController";
-import { UpdatedogController } from "./controller/dog/UpdatedogController";
-import { DeletedogController } from "./controller/dog/DeletedogController";
+import { CreateAddressController } from "./controller/Address/CreateAddressController";
+import { DeleteAddressController} from "./controller/Address/DeleteAddressController";
+import {ListAddressController} from "./controller/Address/ListAddressController";
+import {UpdateAddressController} from "./controller/Address/UpdateAddressController";
 
 
 
@@ -62,11 +62,10 @@ const listCategoryController  = new ListCategoryController();
 const updateCategoryController  = new UpdateCategoryController();
 const deleteCategoryController  = new DeleteCategoryController();
 
-const createdogController = new CreatedogController();
-const listdogController = new ListdogController();
-const updatedogController = new UpdatedogController();
-const deletedogController = new DeletedogController();
-
+const createAddressController = new CreateAddressController();
+const listAddressController = new ListAddressController();
+const updateAddressController = new UpdateAddressController();
+const deleteAddressController = new DeleteAddressController();
 
 const autenticationController = new AutenticationController();
 
@@ -98,10 +97,10 @@ router.get("/category", listCategoryController.handle);
 router.put("/category/:id", updateCategoryController.handle);
 router.delete("/category/:id", deleteCategoryController.handle);
 
-router.post("/dog", createdogController.handle);
-router.get("/dog", listdogController.handle);
-router.put("/dog/:id", updatedogController.handle);
-router.delete("/dog/:id", deletedogController.handle);
+router.post("/address", createAddressController.handle);
+router.get("/address", listAddressController.handle);
+router.put("/address/:id", updateAddressController.handle);
+router.delete("/address/:id", deleteAddressController.handle);
 
 router.post("/users", autenticationController.handle);
 router.use(ensureAuthenticated);

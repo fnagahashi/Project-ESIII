@@ -8,6 +8,7 @@ interface IClientRequest {
     dateBirth: string;
     cpf: string;
     gender: Gender;
+    typePhone:string;
     phone: string;
     email: string;
     password: string;
