@@ -4,7 +4,8 @@ interface ICreditCardRequest{
     id?: string;
     number: string;
     name: string;
-    brand?: Brand;
+    brand: Brand;
     securityCode: string;
+    clientId: string;
 }
 export{ICreditCardRequest}

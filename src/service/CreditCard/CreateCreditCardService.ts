@@ -4,16 +4,17 @@ import { CreditCardRepositories } from "../../repository/CreditCardRepositories"
 
 class CreateCreditCardService {
     async execute ({name,
+        number,
         brand,
         securityCode,
         clientId }: ICreditCardRequest){
-        if (!email) {
-            throw new Error ("Email invalido");
+        if (!number) {
+            throw new Error ("O cliente deve cadastrar pelo menos um cartão de crédito!");
         }
         const clientRepository = getCustomRepository(CreditCardRepositories);
-        const clientAlreadyExist = await clientRepository.findOne({ email, });
+        const clientAlreadyExist = await clientRepository.findOne({ number, });
 
-        const client = clientRepository.create({ name, tel, email, endereco, bairro, cidade, uf, });
+        const client = clientRepository.create({ name, number, brand, securityCode, clientId });
         await clientRepository.save(client);
           
         return client;

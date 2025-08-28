@@ -1,3 +1,5 @@
+import { IClientRequest } from "./IClientInterface";
+
 type AddressType = 'billing' | 'delivery';
 interface IAddressRequest {
     id?: string;

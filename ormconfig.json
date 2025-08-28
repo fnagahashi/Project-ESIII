@@ -3,8 +3,8 @@
    "host": "localhost",
    "port": 5432,
    "username": "postgres",
-   "password": "123Fatec",
-   "database": "app",
+   "password": "nagahashi98",
+   "database": "project_LES",
    "synchronize": true,
    "logging": false,
    "entities": [
