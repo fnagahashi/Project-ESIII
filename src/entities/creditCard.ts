@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import{v4 as uuid} from "uuid";
 import { Client } from "./client";
+import { Brand } from "../controller/creditCard/Brand";
 
 @Entity("creditCard")
 class CreditCard{
@@ -13,8 +14,10 @@ class CreditCard{
     @Column()
     name!: string;
 
-    @Column()
-    brand!: string;
+    @Column({
+        type: "enum",
+        enum: Brand,
+    })
 
     @Column()
     securityCode!: string;

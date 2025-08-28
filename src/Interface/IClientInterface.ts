@@ -1,6 +1,6 @@
 import { Gender } from "../controller/client/Gender";
 import { IAddressRequest } from "./IAddressInterface";
-import { ICreditCard } from "./ICreditCardInterface";
+import { ICreditCardRequest } from "./ICreditCardInterface";
 
 interface IClientRequest {
     id?: string;
@@ -13,7 +13,7 @@ interface IClientRequest {
     email: string;
     password: string;
     address: IAddressRequest[];
-    creditCard: ICreditCard[];
+    creditCard: ICreditCardRequest[];
     obs?: string;
 }
 
