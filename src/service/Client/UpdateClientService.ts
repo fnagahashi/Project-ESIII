@@ -3,7 +3,7 @@ import { IClientRequest } from "../../Interface/IClientInterface";
 import { ClientRepositories } from "../../repository/ClientRepositories";
 
 class UpdateClientService {
-    async execute ({id, name, tel, email, endereco, bairro, cidade, uf}: IClientRequest){
+    async execute ({id, name, dateBirth, email, cpf, gender, typePhone, phone, password }: IClientRequest){
         if (!email) {
             throw new Error ("Email invalido");
         }
@@ -16,23 +16,23 @@ class UpdateClientService {
         if (name) {
             client.name = name;
         }
-        if (tel) {
-            client.tel = tel;
+        if (dateBirth) {
+            client.dateBirth = dateBirth;
+        }
+        if (cpf) {
+            client.cpf = cpf;
+        }
+        if (gender) {
+            client.gender = gender;
+        }
+        if (typePhone) {
+            client.typePhone = typePhone;
+        }
+        if (phone) {
+            client.phone = phone;
         }
         if (email) {
             client.email = email;
-        }
-        if (endereco) {
-            client.endereco = endereco;
-        }
-        if (bairro) {
-            client.bairro = bairro;
-        }
-        if (cidade) {
-            client.cidade = cidade;
-        }
-        if (uf) {
-            client.uf = uf;
         }
         
         await clientRepository.update(id || 0, client);

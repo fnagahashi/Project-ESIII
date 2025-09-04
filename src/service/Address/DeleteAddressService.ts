@@ -12,7 +12,7 @@ class DeleteAddressService{
 
         await addressRepository.remove(address);
 
-        return {message: "Endereço deletado com sucesso"};
+        return {id, message: "Endereço deletado com sucesso"};
 
     }
 }

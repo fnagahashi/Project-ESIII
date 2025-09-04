@@ -32,7 +32,7 @@ class CreateAddressService {
             client: { id: clientId } });
        await addressRepository.save(address);
 
-       const allAddresses = await addressRepository.find({ where: { clientId } });
+       const allAddresses = await addressRepository.find({ where: { client: {id:clientId} } });
 
         const hasBilling = allAddresses.some(a => a.typeAddress === "billing");
         const hasDelivery = allAddresses.some(a => a.typeAddress === "delivery");

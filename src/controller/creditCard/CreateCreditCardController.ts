@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
-import { CreateClientService } from "../../service/Client/CreateClientService";
+import { CreateCreditCardService } from "../../service/CreditCard/CreateCreditCardService";
 import { Brand } from "./Brand";
 
 class CreateCreditCardController {
   async handle(request: Request, response: Response) {
-    const { number,
-        name,
+    const { cardNumber,
+        cardName,
         brand,
         securityCode,
         clientId } = request.body;
     const createCreditCardService = new CreateCreditCardService();
     const creditCard = await createCreditCardService.execute(
       {
-        number,
-        name,
+        cardNumber,
+        cardName,
         brand,
         securityCode,
         clientId

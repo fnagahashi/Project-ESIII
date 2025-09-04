@@ -12,8 +12,8 @@ interface IClientRequest {
     phone: string;
     email: string;
     password: string;
-    address: IAddressRequest[];
-    creditCard: ICreditCardRequest[];
+    addresses: IAddressRequest[];
+    creditCards: ICreditCardRequest[];
     obs?: string;
 }
 

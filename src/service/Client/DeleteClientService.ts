@@ -8,9 +8,9 @@ class DeleteClientService{
         if (!client) {
             throw new Error("Cliente não encontrado");
         }
-        await clientRepository.remove(client);
+        await clientRepository.softRemove(client);
 
-        return { message: "Cliente deletado com sucesso" };
+        return { id, message: "Cliente deletado com sucesso" };
     }
 }
 export{DeleteClientService};

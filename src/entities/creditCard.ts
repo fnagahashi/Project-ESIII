@@ -9,10 +9,10 @@ class CreditCard{
     readonly id!: string;
 
     @Column()
-    number!: string;
+    cardNumber!: string;
 
     @Column()
-    name!: string;
+    cardName!: string;
 
     @Column({
         type: "enum",

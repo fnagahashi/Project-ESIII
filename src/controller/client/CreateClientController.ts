@@ -11,8 +11,8 @@ class CreateClientController {
       phone,
       email,
       password,
-      address,
-      creditCard,
+      addresses,
+      creditCards,
       obs, } = request.body;
     const createClientService = new CreateClientService();
    const client = await createClientService.execute(
@@ -25,8 +25,8 @@ class CreateClientController {
       phone,
       email,
       password,
-      address,
-      creditCard,
+      addresses,
+      creditCards,
       obs,
     });
     response.json({message:"Cliente cadastrado!"});

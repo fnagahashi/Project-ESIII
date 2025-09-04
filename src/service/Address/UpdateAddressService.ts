@@ -49,7 +49,7 @@ class UpdateAddressService {
             address.typeAddress = typeAddress;
         }
 
-        await addressRepository.update(id, address);
+        await addressRepository.save(address);
 
         return address;
     }

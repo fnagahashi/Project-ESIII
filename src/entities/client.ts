@@ -25,6 +25,9 @@ class Client{
     gender!: Gender;
 
     @Column()
+    typePhone!: string;
+
+    @Column()
     phone!: string;
 
     @Column()
