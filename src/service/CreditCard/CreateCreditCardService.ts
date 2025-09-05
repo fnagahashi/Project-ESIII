@@ -15,7 +15,7 @@ class CreateCreditCardService {
             throw new Error("Todos os campos do cartão de crédito são obrigatórios");
         }
         const creditCardRepository = getCustomRepository(CreditCardRepositories);
-        const creditCardAlreadyExist = await creditCardRepository.findOne({ cardNumber });
+        const creditCardAlreadyExist = await creditCardRepository.findOne({ where:{ cardNumber } });
 
         const creditCard = creditCardRepository.create({ cardName, cardNumber, brand, securityCode, client: { id: clientId } });
         await creditCardRepository.save(creditCard);

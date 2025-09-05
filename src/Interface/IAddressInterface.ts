@@ -15,7 +15,7 @@ interface IAddressRequest {
     typeResidence: string;
     obs?: string;
     typeAddress: AddressType;
-    clientId: string;
+    clientId?: string;
 }
 
 export { IAddressRequest}

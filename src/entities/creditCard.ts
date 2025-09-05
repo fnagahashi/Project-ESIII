@@ -7,17 +7,18 @@ import { Brand } from "../controller/creditCard/Brand";
 class CreditCard{
     @PrimaryColumn()
     readonly id!: string;
+    
+    @Column()
+    cardName!: string;
 
     @Column()
     cardNumber!: string;
-
-    @Column()
-    cardName!: string;
 
     @Column({
         type: "enum",
         enum: Brand,
     })
+    brand!: Brand;
 
     @Column()
     securityCode!: string;

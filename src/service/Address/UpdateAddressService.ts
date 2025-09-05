@@ -3,7 +3,7 @@ import { IAddressRequest } from "../../Interface/IAddressInterface";
 import { AddressRepositories } from "../../repository/AddressRepositories";
 
 class UpdateAddressService {
-    async execute ({id, nameAddress, cep, streetType, street, neighborhood, city, state, country, number, typeResidence, obs, typeAddress, clientId}: IAddressRequest){
+    async execute ({id, nameAddress, cep, streetType, street, neighborhood, city, state, country, number, typeResidence, obs, typeAddress }: IAddressRequest){
         const addressRepository = getCustomRepository(AddressRepositories);
         
         const address = await addressRepository.findOne(id);

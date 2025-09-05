@@ -4,46 +4,58 @@ import { Client } from "../../entities/client";
 import { getCustomRepository, getRepository } from "typeorm";
 
 class CreateAddressService {
-    async execute ({ nameAddress, cep, streetType, street, neighborhood, number, city, state, country, typeResidence, typeAddress, obs, clientId }: IAddressRequest){
-        if (!nameAddress) {
-            throw new Error ("Nome Obrigatório");
-        }
+  async execute({ nameAddress, cep, streetType, street, neighborhood, number, city, state, country, typeResidence, typeAddress, obs, clientId }: IAddressRequest) {
 
-        const addressRepository = getCustomRepository(AddressRepositories);
-        const clientRepository = getRepository(Client);
-        const addressAlreadyExists = await addressRepository.findOne({ nameAddress });
-
-        if (addressAlreadyExists) {
-            throw new Error("Endereço já existe");
-        }
-       const address = addressRepository.create({  
-            nameAddress,
-            cep,
-            streetType,
-            street,
-            neighborhood,
-            number,
-            city,
-            state,
-            country,
-            typeResidence,
-            typeAddress,
-            obs,
-            client: { id: clientId } });
-       await addressRepository.save(address);
-
-       const allAddresses = await addressRepository.find({ where: { client: {id:clientId} } });
-
-        const hasBilling = allAddresses.some(a => a.typeAddress === "billing");
-        const hasDelivery = allAddresses.some(a => a.typeAddress === "delivery");
-        if (!hasDelivery) {
-            throw new Error("Cliente deve possuir pelo menos um endereço de entrega!");
-        }
-
-        if (!hasBilling) {
-            throw new Error("Cliente deve possuir pelo menos um endereço de cobrança!");
-        }
-        return address;
+    if (!nameAddress) {
+      throw new Error("Nome Obrigatório");
     }
+
+    const addressRepository = getCustomRepository(AddressRepositories);
+    const clientRepository = getRepository(Client);
+
+    const client = await clientRepository.findOne({ where: { id: clientId } });
+    if (!client) {
+      throw new Error("Cliente não encontrado");
+    }
+
+    const addressAlreadyExists = await addressRepository.findOne({ where: { nameAddress, client: { id: client.id } } });
+    if (addressAlreadyExists) {
+      throw new Error("Endereço já existe");
+    }
+
+    const address = addressRepository.create({
+      nameAddress,
+      cep,
+      streetType,
+      street,
+      neighborhood,
+      number,
+      city,
+      state,
+      country,
+      typeResidence,
+      typeAddress,
+      obs,
+      client, // associação correta
+    });
+
+    await addressRepository.save(address);
+
+    const allAddresses = await addressRepository.find({ where: { client: { id: client.id } } });
+
+    const hasBilling = allAddresses.some(a => a.typeAddress === "billing");
+    const hasDelivery = allAddresses.some(a => a.typeAddress === "delivery");
+
+    if (!hasDelivery) {
+      throw new Error("Cliente deve possuir pelo menos um endereço de entrega!");
+    }
+
+    if (!hasBilling) {
+      throw new Error("Cliente deve possuir pelo menos um endereço de cobrança!");
+    }
+
+    return address;
+  }
 }
-export {CreateAddressService};
+
+export { CreateAddressService };

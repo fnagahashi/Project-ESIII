@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import { CreateClientService } from "../../service/Client/CreateClientService";
 
 class CreateClientController {
@@ -29,7 +29,9 @@ class CreateClientController {
       creditCards,
       obs,
     });
-    response.json({message:"Cliente cadastrado!"});
+    response.status(201).json({message:"Cliente cadastrado!", client});
+  } catch (error: any) {
+    return response.status(400).json({ error: error.message });
   }
 }
 export { CreateClientController };
