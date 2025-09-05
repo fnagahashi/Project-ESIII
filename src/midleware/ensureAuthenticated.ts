@@ -1,17 +1,11 @@
 import  { Request, Response, NextFunction } from 'express';
 import {verify} from "jsonwebtoken"
+import { AuthRequest } from '../Interface/AuthRequest';
 
 interface IPayload{
     sub: string; email: string;
 }
 
-declare global {
-  namespace Express {
-    interface Request {
-      user_id?: string;
-    }
-  }
-}
 
 export function ensureAuthenticated (request: Request, response: Response, next: NextFunction){
     //Receber o token
@@ -25,12 +19,13 @@ export function ensureAuthenticated (request: Request, response: Response, next:
     try{
         //Validar se token é valido
         const {sub, email} = verify(token, "ecommerce") as IPayload;
-        console.log(email);
-        console.log(sub);
-        //return 
+        const req = request as AuthRequest;
+          req.userId = sub;
+          req.email = email;
         next();
     } 
     catch(err){
-        response.status(401).end();
+        response.status(401).json({message: "Token inválido!"});
+        return;
     }
 }

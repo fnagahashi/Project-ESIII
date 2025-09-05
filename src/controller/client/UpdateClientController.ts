@@ -23,7 +23,7 @@ class UpdateClientController {
         obs
       });
 
-      response.status(200).json({ message: `Cliente ${id} atualizado`, client });
+      response.status(200).json({ message: `Cliente ${client.name} atualizado`, client });
     } catch (error: any) {
       response.status(400).json({ error: error.message });
     }

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import{v4 as uuid} from "uuid";
 import { CreditCard} from './creditCard'
 import { Address } from "./address";
@@ -41,6 +41,9 @@ class Client{
 
     @OneToMany(() => Address, address => address.client, {cascade: true})
     addresses!: Address[];
+
+    @DeleteDateColumn()
+    deletedAt?: Date;
 
     @CreateDateColumn()
     created_at!: Date;

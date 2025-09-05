@@ -3,7 +3,7 @@ import { User } from "../../entities/User";
 import bcrypt from "bcryptjs";
 
 interface IRequest {
-  userId: number;
+  userId: string;
   oldPassword: string;
   newPassword: string;
 }

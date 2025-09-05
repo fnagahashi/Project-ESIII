@@ -1,25 +1,25 @@
-import { Request, Response } from "express";
+import { Response } from "express";
+import { AuthRequest } from "../../Interface/AuthRequest";
 import { UpdatePasswordService } from "../../service/Password/UpdatePasswordService";
 
 class UpdatePasswordController {
-  private updatePasswordService = new UpdatePasswordService();
-
-  handle = async (request: Request, response: Response) => {
+  handle = async (req: AuthRequest, res: Response) => {
     try {
-      const { oldPassword, newPassword } = request.body;
-      const userId = Number(request.user_id); 
+      const { oldPassword, newPassword } = req.body;
+      const userId = req.userId; // camelCase agora
 
-      const result = await this.updatePasswordService.execute({
+      const updatePasswordService = new UpdatePasswordService();
+      await updatePasswordService.execute({
         userId,
         oldPassword,
         newPassword,
       });
 
-      response.status(200).json(result);
-    } catch (error: any) {
-      response.status(400).json({ error: error.message });
+      res.status(200).json({ message: "Senha atualizada com sucesso!" });
+    } catch (err: any) {
+      res.status(400).json({ error: err.message });
     }
-  }
+  };
 }
 
 export { UpdatePasswordController };
