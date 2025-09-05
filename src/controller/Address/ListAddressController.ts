@@ -6,9 +6,9 @@ export class ListAddressController {
         try {
             const listAddressService = new ListAddressService();
             const addresses = await listAddressService.execute();
-            return response.status(200).json(addresses);
+            response.status(200).json(addresses);
         } catch (error: any) {
-            return response.status(400).json({ error: error.message });
+            response.status(400).json({ error: error.message });
         }
     }
 }

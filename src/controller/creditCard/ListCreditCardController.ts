@@ -6,9 +6,9 @@ export class ListCreditCardController {
         try {
             const listCreditCardService = new ListCreditCardService();
             const creditCards = await listCreditCardService.execute();
-            return response.status(200).json(creditCards);
+            response.status(200).json(creditCards);
         } catch (error: any) {
-            return response.status(400).json({ error: error.message });
+            response.status(400).json({ error: error.message });
         }
     }
 }

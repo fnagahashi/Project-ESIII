@@ -24,12 +24,12 @@ class UpdateAddressController {
         obs
       });
 
-      return response.status(200).json({ 
+     response.status(200).json({ 
         message: `Endereço ${id} atualizado`, 
         address 
       });
     } catch (error: any) {
-      return response.status(400).json({ error: error.message });
+      response.status(400).json({ error: error.message });
     }
   }
 }

@@ -16,9 +16,9 @@ class CreateCreditCardController {
         clientId
       }
     );
-    return response.status(201).json({ message: "Cartão de crédito cadastrado!", creditCard });
+    response.status(201).json({ message: "Cartão de crédito cadastrado!", creditCard });
   } catch (error: any) {
-    return response.status(400).json({ error: error.message });
+    response.status(400).json({ error: error.message });
   }
 }
 }

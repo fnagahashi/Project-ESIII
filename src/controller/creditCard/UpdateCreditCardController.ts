@@ -23,12 +23,12 @@ class UpdateCreditCardController {
         brand: creditCard.brand,
       };
 
-      return response.status(200).json({ 
+      response.status(200).json({ 
         message: `Cartão de crédito ${id} atualizado`, 
         creditCard: safeCreditCard 
       });
     } catch (error: any) {
-      return response.status(400).json({ error: error.message });
+      response.status(400).json({ error: error.message });
     }
   }
 }

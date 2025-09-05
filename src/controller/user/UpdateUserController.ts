@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UpdateUserService } from "../../service/User/UpdateUserService";
+import UpdateUserService from "../../service/User/UpdateUserService";
 class UpdateUserController {
   async handle(request: Request, response: Response) {
     const { name, email, admin, password } = request.body;

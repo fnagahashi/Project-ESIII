@@ -4,6 +4,15 @@ import {verify} from "jsonwebtoken"
 interface IPayload{
     sub: string; email: string;
 }
+
+declare global {
+  namespace Express {
+    interface Request {
+      user_id?: string;
+    }
+  }
+}
+
 export function ensureAuthenticated (request: Request, response: Response, next: NextFunction){
     //Receber o token
     const authToken = request.headers.authorization;
@@ -15,11 +24,11 @@ export function ensureAuthenticated (request: Request, response: Response, next:
     const [, token] = authToken.split(" ");
     try{
         //Validar se token é valido
-        const {sub, email} = verify(token, "mobilefatec") as IPayload;
+        const {sub, email} = verify(token, "ecommerce") as IPayload;
         console.log(email);
         console.log(sub);
         //return 
-        next(request.params);
+        next();
     } 
     catch(err){
         response.status(401).end();

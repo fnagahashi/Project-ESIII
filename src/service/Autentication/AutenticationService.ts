@@ -27,7 +27,7 @@ class AutenticationService {
         {
             email: email,
         },
-        "mobilefatec",
+        "ecommerce",
         {
             subject: ("others"),
             expiresIn: "1d",

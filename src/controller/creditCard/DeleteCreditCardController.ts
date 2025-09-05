@@ -7,9 +7,9 @@ class DeleteCreditCardController {
       const id = request.params.id;
       const deleteCreditCardService = new DeleteCreditCardService();
       const msg = await deleteCreditCardService.execute(id);
-      return response.status(200).json(msg);
+      response.status(200).json(msg);
     } catch (error: any) {
-      return response.status(400).json({ error: error.message });
+      response.status(400).json({ error: error.message });
     }
   }
 }

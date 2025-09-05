@@ -1,108 +1,150 @@
 import { Router } from "express";
+
+// Users
 import { CreateUserController } from "./controller/user/CreateUserController";
 import { ListUserController } from "./controller/user/ListUserController";
 import { UpdateUserController } from "./controller/user/UpdateUserController";
 import { DeleteUserController } from "./controller/user/DeleteUserController";
+import { UpdatePasswordController } from "./controller/Password/UpdatePasswordController";
 
-import { DeleteSalesController } from "./controller/sales/DeleteSalesController";
-import { UpdateSalesController } from "./controller/sales/UpdateSalesController";
-import { ListSalesController } from "./controller/sales/ListSalesController";
+// Authentication
+import { AutenticationController } from "./controller/Autentication/AutenticationController";
+
+// Sales
 import { CreateSalesController } from "./controller/sales/CreateSalesController";
+import { ListSalesController } from "./controller/sales/ListSalesController";
+import { UpdateSalesController } from "./controller/sales/UpdateSalesController";
+import { DeleteSalesController } from "./controller/sales/DeleteSalesController";
 
+// Products (Books)
 import { CreateProductController } from "./controller/books/CreateProductController";
 import { ListProductController } from "./controller/books/ListProductController";
 import { UpdateProductController } from "./controller/books/UpdateProductController";
 import { DeleteProductController } from "./controller/books/DeleteProductController";
 
+// Clients
 import { CreateClientController } from "./controller/client/CreateClientController";
 import { ListClientController } from "./controller/client/ListClientController";
 import { UpdateClientController } from "./controller/client/UpdateClientController";
 import { DeleteClientController } from "./controller/client/DeleteClientController";
 
+// Categories
 import { CreateCategoryController } from "./controller/category/CreateCategoryController";
 import { ListCategoryController } from "./controller/category/ListCategoryController";
 import { UpdateCategoryController } from "./controller/category/UpdateCategoryController";
 import { DeleteCategoryController } from "./controller/category/DeleteCategoryController";
 
+// Addresses
+import { CreateAddressController } from "./controller/Address/CreateAddressController";
+import { ListAddressController } from "./controller/Address/ListAddressController";
+import { UpdateAddressController } from "./controller/Address/UpdateAddressController";
+import { DeleteAddressController } from "./controller/Address/DeleteAddressController";
 
+// Credit Cards
+import { CreateCreditCardController } from "./controller/creditCard/CreateCreditCardController";
+import { ListCreditCardController } from "./controller/creditCard/ListCreditCardController";
+import { UpdateCreditCardController } from "./controller/creditCard/UpdateCreditCardController";
+import { DeleteCreditCardController } from "./controller/creditCard/DeleteCreditCardController";
 
-import { AutenticationController } from "./controller/Autentication/AutenticationController";
-
+// Middleware
 import { ensureAuthenticated } from "./midleware/ensureAuthenticated";
 
-import { CreateAddressController } from "./controller/Address/CreateAddressController";
-import { DeleteAddressController} from "./controller/Address/DeleteAddressController";
-import {ListAddressController} from "./controller/Address/ListAddressController";
-import {UpdateAddressController} from "./controller/Address/UpdateAddressController";
+const router = Router();
 
+// Users
+const createUserController = new CreateUserController();
+const listUserController = new ListUserController();
+const updateUserController = new UpdateUserController();
+const deleteUserController = new DeleteUserController();
+const updatePasswordController = new UpdatePasswordController();
 
+// Authentication
+const autenticationController = new AutenticationController();
 
-const createUserController  = new CreateUserController();
-const listUserController  = new ListUserController();
-const updateUserController  = new UpdateUserController();
-const deleteUserController  = new DeleteUserController();
+// Sales
+const createSalesController = new CreateSalesController();
+const listSalesController = new ListSalesController();
+const updateSalesController = new UpdateSalesController();
+const deleteSalesController = new DeleteSalesController();
 
-const createSalesController  = new CreateSalesController();
-const listSalesController  = new ListSalesController();
-const updateSalesController  = new UpdateSalesController();
-const deleteSalesController  = new DeleteSalesController();
+// Products
+const createProductController = new CreateProductController();
+const listProductController = new ListProductController();
+const updateProductController = new UpdateProductController();
+const deleteProductController = new DeleteProductController();
 
-const createProductController  = new CreateProductController();
-const listProductController  = new ListProductController();
-const updateProductController  = new UpdateProductController();
-const deleteProductController  = new DeleteProductController();
+// Clients
+const createClientController = new CreateClientController();
+const listClientController = new ListClientController();
+const updateClientController = new UpdateClientController();
+const deleteClientController = new DeleteClientController();
 
-const createClientController  = new CreateClientController();
-const listClientController  = new ListClientController();
-const updateClientController  = new UpdateClientController();
-const deleteClientController  = new DeleteClientController();
+// Categories
+const createCategoryController = new CreateCategoryController();
+const listCategoryController = new ListCategoryController();
+const updateCategoryController = new UpdateCategoryController();
+const deleteCategoryController = new DeleteCategoryController();
 
-const createCategoryController  = new CreateCategoryController();
-const listCategoryController  = new ListCategoryController();
-const updateCategoryController  = new UpdateCategoryController();
-const deleteCategoryController  = new DeleteCategoryController();
-
+// Addresses
 const createAddressController = new CreateAddressController();
 const listAddressController = new ListAddressController();
 const updateAddressController = new UpdateAddressController();
 const deleteAddressController = new DeleteAddressController();
 
-const autenticationController = new AutenticationController();
+// Credit Cards
+const createCreditCardController = new CreateCreditCardController();
+const listCreditCardController = new ListCreditCardController();
+const updateCreditCardController = new UpdateCreditCardController();
+const deleteCreditCardController = new DeleteCreditCardController();
 
+// ========================
+// Routes
+// ========================
 
-const router = Router();
+// --- Authentication ---
+router.post("/login", autenticationController.handle);
 
+// --- Users ---
 router.post("/users", createUserController.handle);
-router.get("/users", listUserController.handle);
-router.put("/users/:id", updateUserController.handle);
-router.delete("/users/:id", deleteUserController.handle);
+router.get("/users", ensureAuthenticated, listUserController.handle);
+router.put("/users/:id", ensureAuthenticated, updateUserController.handle);
+router.delete("/users/:id", ensureAuthenticated, deleteUserController.handle);
+router.patch("/users/password", ensureAuthenticated, updatePasswordController.handle);
 
-router.post("/sales", createSalesController.handle);
-router.get("/sales", listSalesController.handle);
-router.put("/sales/:id", updateSalesController.handle);
-router.delete("/sales/:id", deleteSalesController.handle);
+// --- Clients ---
+router.post("/clients", ensureAuthenticated, createClientController.handle);
+router.get("/clients", ensureAuthenticated, listClientController.handle);
+router.put("/clients/:id", ensureAuthenticated, updateClientController.handle);
+router.delete("/clients/:id", ensureAuthenticated, deleteClientController.handle);
 
-router.post("/client", createClientController.handle);
-router.get("/client", listClientController.handle);
-router.put("/client/:id", updateClientController.handle);
-router.delete("/client/:id", deleteClientController.handle);
+// --- Products ---
+router.post("/products", ensureAuthenticated, createProductController.handle);
+router.get("/products", listProductController.handle);
+router.put("/products/:id", ensureAuthenticated, updateProductController.handle);
+router.delete("/products/:id", ensureAuthenticated, deleteProductController.handle);
 
-router.post("/product", createProductController.handle);
-router.get("/product", listProductController.handle);
-router.put("/product/:id", updateProductController.handle);
-router.delete("/product/:id", deleteProductController.handle);
+// --- Categories ---
+router.post("/categories", ensureAuthenticated, createCategoryController.handle);
+router.get("/categories", listCategoryController.handle); // leitura pública
+router.put("/categories/:id", ensureAuthenticated, updateCategoryController.handle);
+router.delete("/categories/:id", ensureAuthenticated, deleteCategoryController.handle);
 
-router.post("/category", createCategoryController.handle);
-router.get("/category", listCategoryController.handle);
-router.put("/category/:id", updateCategoryController.handle);
-router.delete("/category/:id", deleteCategoryController.handle);
+// --- Addresses ---
+router.post("/addresses", ensureAuthenticated, createAddressController.handle);
+router.get("/addresses", ensureAuthenticated, listAddressController.handle);
+router.put("/addresses/:id", ensureAuthenticated, updateAddressController.handle);
+router.delete("/addresses/:id", ensureAuthenticated, deleteAddressController.handle);
 
-router.post("/address", createAddressController.handle);
-router.get("/address", listAddressController.handle);
-router.put("/address/:id", updateAddressController.handle);
-router.delete("/address/:id", deleteAddressController.handle);
+// --- Credit Cards ---
+router.post("/credit-cards", ensureAuthenticated, createCreditCardController.handle);
+router.get("/credit-cards", ensureAuthenticated, listCreditCardController.handle);
+router.put("/credit-cards/:id", ensureAuthenticated, updateCreditCardController.handle);
+router.delete("/credit-cards/:id", ensureAuthenticated, deleteCreditCardController.handle);
 
-router.post("/users", autenticationController.handle);
-router.use(ensureAuthenticated);
+// --- Sales ---
+router.post("/sales", ensureAuthenticated, createSalesController.handle);
+router.get("/sales", ensureAuthenticated, listSalesController.handle);
+router.put("/sales/:id", ensureAuthenticated, updateSalesController.handle);
+router.delete("/sales/:id", ensureAuthenticated, deleteSalesController.handle);
 
-export { router }
+export { router };
