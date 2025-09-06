@@ -3,9 +3,10 @@ import {compare, hash} from "bcryptjs";
 import { IClientRequest } from "../../Interface/IClientInterface";
 import { getCustomRepository } from "typeorm";
 import { ClientRepositories } from "../../repository/ClientRepositories";
+import { ILoginRequest } from "../../Interface/ILoginRequest";
 
 class AutenticationService {
-    async execute ({email, password}: IClientRequest){
+    async execute ({email, password}: ILoginRequest){
         if (!email) {
             throw new Error("Email incorreto");
         }
@@ -13,7 +14,7 @@ class AutenticationService {
             throw new Error("Password incorreto");
         }
     const clientRepository = getCustomRepository(ClientRepositories);
-    const clientAlreadyExists = await clientRepository.findOne({ where: { email: email, password: password },});
+    const clientAlreadyExists = await clientRepository.findOne({ where: { email: email },});
     if (!clientAlreadyExists) {
         throw new Error("Cliente nao encontrado");
     }

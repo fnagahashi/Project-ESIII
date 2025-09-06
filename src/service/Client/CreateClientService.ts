@@ -1,6 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import { IClientRequest } from "../../Interface/IClientInterface";
 import { ClientRepositories } from "../../repository/ClientRepositories";
+import { hash } from "bcryptjs";
 
 class CreateClientService {
     async execute ({name, dateBirth, email, cpf, gender, typePhone, phone, password, addresses, creditCards }: IClientRequest){
@@ -26,7 +27,8 @@ class CreateClientService {
         throw new Error(`${key} é obrigatório`);
     }
         }
-        const client = clientRepository.create({ name, dateBirth, email, cpf, gender, typePhone, phone, password, addresses: addresses, creditCards: creditCards });
+        const passwordHash = await hash(password, 8);
+        const client = clientRepository.create({ name, dateBirth, email, cpf, gender, typePhone, phone, password:passwordHash, addresses: addresses, creditCards: creditCards });
         await clientRepository.save(client);
           
         return client;
