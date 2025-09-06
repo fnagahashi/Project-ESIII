@@ -1,23 +1,23 @@
 import{sign} from "jsonwebtoken";
 import {compare, hash} from "bcryptjs";
-import { IUserRequest } from "../../Interface/IUserinterface";
+import { IClientRequest } from "../../Interface/IClientInterface";
 import { getCustomRepository } from "typeorm";
-import { UsersRepositories } from "../../repository/UsersRepositories";
+import { ClientRepositories } from "../../repository/ClientRepositories";
 
 class AutenticationService {
-    async execute ({email, password}: IUserRequest){
+    async execute ({email, password}: IClientRequest){
         if (!email) {
             throw new Error("Email incorreto");
         }
         if (!password){
             throw new Error("Password incorreto");
         }
-    const usersRepository = getCustomRepository(UsersRepositories);
-    const userAlreadyExists = await usersRepository.findOne({ where: { email: email },});
-    if (!userAlreadyExists) {
-        throw new Error("Usuario nao encontrado");
+    const clientRepository = getCustomRepository(ClientRepositories);
+    const clientAlreadyExists = await clientRepository.findOne({ where: { email: email, password: password },});
+    if (!clientAlreadyExists) {
+        throw new Error("Cliente nao encontrado");
     }
-    const passwordMatch = await compare(password, userAlreadyExists.password);
+    const passwordMatch = await compare(password, clientAlreadyExists.password);
 
       if (!passwordMatch) {
          throw new Error("Senha incorreta");

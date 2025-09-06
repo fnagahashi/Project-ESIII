@@ -43,7 +43,7 @@ class Address{
     @Column()
     typeAddress!: AddressType;
 
-    @Column()
+    @Column({ nullable: true })
     obs!: string;
 
     @ManyToOne(() => Client, client => client.addresses)

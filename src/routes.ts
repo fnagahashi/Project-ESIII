@@ -130,16 +130,16 @@ router.delete("/clients/:id", deleteClientController.handle);
 // router.delete("/categories/:id", ensureAuthenticated, deleteCategoryController.handle);
 
 // --- Addresses ---
-router.post("/addresses", ensureAuthenticated, createAddressController.handle);
-router.get("/addresses", ensureAuthenticated, listAddressController.handle);
-router.put("/addresses/:id", ensureAuthenticated, updateAddressController.handle);
-router.delete("/addresses/:id", ensureAuthenticated, deleteAddressController.handle);
+router.post("/addresses", createAddressController.handle);
+router.get("/addresses", listAddressController.handle);
+router.put("/addresses/:id", updateAddressController.handle);
+router.delete("/addresses/:id", deleteAddressController.handle);
 
 // --- Credit Cards ---
-router.post("/credit-cards", ensureAuthenticated, createCreditCardController.handle);
-router.get("/credit-cards", ensureAuthenticated, listCreditCardController.handle);
-router.put("/credit-cards/:id", ensureAuthenticated, updateCreditCardController.handle);
-router.delete("/credit-cards/:id", ensureAuthenticated, deleteCreditCardController.handle);
+router.post("/credit-cards", createCreditCardController.handle);
+router.get("/credit-cards", listCreditCardController.handle);
+router.put("/credit-cards/:id", updateCreditCardController.handle);
+router.delete("/credit-cards/:id", deleteCreditCardController.handle);
 
 // --- Sales ---
 // router.post("/sales", ensureAuthenticated, createSalesController.handle);
