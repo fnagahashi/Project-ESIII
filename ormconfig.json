@@ -5,7 +5,8 @@
    "username": "postgres",
    "password": "nagahashi98",
    "database": "project_LES",
-   "synchronize": true,
+   "schema": "public",
+   "synchronize": false,
    "logging": false,
    "entities": [
       "src/entities/**/*.ts"
