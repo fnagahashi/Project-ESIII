@@ -3,7 +3,7 @@ import { CreatePaymentService } from "../../service/Payment/CreatePaymentService
 
 class CreatePaymentController {
   async handle(request: Request, response: Response) {
-    const { amount, method, status } = request.body;
+    const { valor, formaPagamento, isPaid } = request.body;
     const createPaymentService = new CreatePaymentService();
     const payment = await createPaymentService.execute(
    {

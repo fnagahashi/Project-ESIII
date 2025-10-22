@@ -2,21 +2,21 @@ import { IPaymentRequest } from "../../Interface/IPaymentInterface";
 import { PaymentRepositories } from "../../repository/PaymentRepositories";
 import { getCustomRepository } from "typeorm";
 
-class CreateCategoryService {
-    async execute ({name}: ICategoryRequest){
-        if (!name) {
-            throw new Error ("Nome Obrigatório");
+class CreatePaymentService {
+    async execute ({valor, formaPagamento, isPaid}: IPaymentRequest){
+        if (!valor) {
+            throw new Error ("Valor Obrigatório");
         }
 
-        const categoryRepository = getCustomRepository(CategoryRepositories);
-        const categoryAlreadyExists = await categoryRepository.findOne({ name });
+        const paymentRepository = getCustomRepository(PaymentRepositories);
+        const paymentAlreadyExists = await paymentRepository.findOne({ isPaid: true });
 
-        if (categoryAlreadyExists) {
-            throw new Error("Categoria já existe");
+        if (paymentAlreadyExists) {
+            throw new Error("Pagamento já realizado");
         }
-       const category = categoryRepository.create({ name }); 
-       await categoryRepository.save(category);
-        return category;
+       const payment = paymentRepository.create({ valor, formaPagamento, isPaid }); 
+       await paymentRepository.save(payment);
+        return payment;
     }
 }
-export {CreateCategoryService};
+export {CreatePaymentService};
