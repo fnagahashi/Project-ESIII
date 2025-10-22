@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import{v4 as uuid} from "uuid";
 import { CreditCard} from './creditCard'
-import { Client } from "./client";
+import { Client } from "./guest";
 
 export type AddressType = "billing" |"delivery";
 
@@ -11,13 +11,7 @@ class Address{
     readonly id!: string;
 
     @Column()
-    nameAddress!: string;
-
-    @Column()
     cep!: string;
-
-    @Column()
-    streetType!: string;
 
     @Column()
     street!: string;
@@ -33,15 +27,6 @@ class Address{
 
     @Column()
     state!: string;
-
-    @Column()
-    country!: string;
-
-    @Column()
-    typeResidence!: string;
-
-    @Column()
-    typeAddress!: AddressType;
 
     @Column({ nullable: true })
     obs!: string;

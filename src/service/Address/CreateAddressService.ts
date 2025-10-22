@@ -1,13 +1,13 @@
 import { IAddressRequest } from "../../Interface/IAddressInterface";
 import { AddressRepositories } from "../../repository/AddressRepositories";
-import { Client } from "../../entities/client";
+import { Client } from "../../entities/guest";
 import { getCustomRepository, getRepository } from "typeorm";
 
 class CreateAddressService {
-  async execute({ nameAddress, cep, streetType, street, neighborhood, number, city, state, country, typeResidence, typeAddress, obs, clientId }: IAddressRequest) {
+  async execute({ cep, street, neighborhood, number, city, state, obs, clientId }: IAddressRequest) {
 
-    if (!nameAddress) {
-      throw new Error("Nome Obrigatório");
+    if (!street || street.trim() === "") {
+      throw new Error("Rua Obrigatória");
     }
 
     const addressRepository = getCustomRepository(AddressRepositories);
@@ -18,41 +18,25 @@ class CreateAddressService {
       throw new Error("Cliente não encontrado");
     }
 
-    const addressAlreadyExists = await addressRepository.findOne({ where: { nameAddress, client: { id: client.id } } });
+    const addressAlreadyExists = await addressRepository.findOne({ where: { client: { id: client.id } } });
     if (addressAlreadyExists) {
       throw new Error("Endereço já existe");
     }
 
     const address = addressRepository.create({
-      nameAddress,
       cep,
-      streetType,
       street,
       neighborhood,
       number,
       city,
       state,
-      country,
-      typeResidence,
-      typeAddress,
       obs,
-      client, // associação correta
+      client,
     });
 
     await addressRepository.save(address);
 
     const allAddresses = await addressRepository.find({ where: { client: { id: client.id } } });
-
-    const hasBilling = allAddresses.some(a => a.typeAddress === "billing");
-    const hasDelivery = allAddresses.some(a => a.typeAddress === "delivery");
-
-    if (!hasDelivery) {
-      throw new Error("Cliente deve possuir pelo menos um endereço de entrega!");
-    }
-
-    if (!hasBilling) {
-      throw new Error("Cliente deve possuir pelo menos um endereço de cobrança!");
-    }
 
     return address;
   }

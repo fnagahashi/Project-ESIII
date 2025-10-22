@@ -1,8 +1,8 @@
 import{sign} from "jsonwebtoken";
 import {compare, hash} from "bcryptjs";
-import { IClientRequest } from "../../Interface/IClientInterface";
+import { IClientRequest } from "../../Interface/IGuestInterface";
 import { getCustomRepository } from "typeorm";
-import { ClientRepositories } from "../../repository/ClientRepositories";
+import { ClientRepositories } from "../../repository/GuestRepositories";
 import { ILoginRequest } from "../../Interface/ILoginRequest";
 
 class AutenticationService {

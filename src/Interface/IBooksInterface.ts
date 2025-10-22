@@ -1,4 +1,4 @@
-import { ICategoryRequest } from "./ICategoryInterface";
+import { ICategoryRequest } from "./IPaymentInterface";
 
 interface IBooksRequest {
     id?: string;

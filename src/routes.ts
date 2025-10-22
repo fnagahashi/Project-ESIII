@@ -23,10 +23,10 @@ import { AutenticationController } from "./controller/Autentication/Autenticatio
 // import { DeleteProductController } from "./controller/books/DeleteProductController";
 
 // Clients
-import { CreateClientController } from "./controller/client/CreateClientController";
-import { ListClientController } from "./controller/client/ListClientController";
-import { UpdateClientController } from "./controller/client/UpdateClientController";
-import { DeleteClientController } from "./controller/client/DeleteClientController";
+import { CreateGuestController } from "./controller/guest/CreateGuestController";
+import { ListGuestController } from "./controller/guest/ListGuestController";
+import { UpdateGuestController } from "./controller/guest/UpdateGuestController";
+import { DeleteGuestController } from "./controller/guest/DeleteGuestController";
 
 // Categories
 // import { CreateCategoryController } from "./controller/category/CreateCategoryController";
