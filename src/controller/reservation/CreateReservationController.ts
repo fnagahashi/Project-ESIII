@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Guest } from "../../entities/guest";
+import { room } from "../../entities/room";
 
 
 class CreateReservationController {
@@ -14,7 +15,7 @@ class CreateReservationController {
       qntAdultos: qntAdultos,
       qntCriancas: qntCriancas,
       Guest: Guest,
-      room: 
+      room: room,
     }; 
     response.json({message:"Reserva cadastrada!"});
   }
