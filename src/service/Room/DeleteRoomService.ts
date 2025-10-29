@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import { ProductRepositories } from "../../repository/ProductRepositories";
+import { ProductRepositories } from "../../repository/RoomRepositories";
 
 class DeleteProductService{
     async execute(id: string) {

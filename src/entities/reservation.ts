@@ -1,28 +1,25 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import{v4 as uuid} from "uuid";
 
-@Entity("sales")
-class sales{
+@Entity("reservation")
+class reservation{
     @PrimaryColumn()
     readonly id!: string;
 
     @Column()
-    qtd!: string;
+    datecheckIn!: string;
 
     @Column()
-    date!: string;
+    datecheckOut!: string;
 
     @Column()
-    price!: string;
+    noShow!: boolean;
 
     @Column()
-    product!: string;
+    qntAdultos!: number;
 
     @Column()
-    client!: string;
-
-    @Column()
-    total!: string;
+    qntCriancas!: number;
 
     @CreateDateColumn()
     created_at!: Date;
@@ -37,4 +34,4 @@ class sales{
     }
 }
 
-export {sales};
+export {reservation};

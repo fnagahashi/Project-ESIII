@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import { ProductRepositories } from "../../repository/ProductRepositories";
+import { ProductRepositories } from "../../repository/RoomRepositories";
 
 class ListProductService {
     async execute () {

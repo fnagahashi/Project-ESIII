@@ -1,20 +1,22 @@
 import { Request, Response } from "express";
-import { CreateSalesService } from "../../service/Sales/CreateSalesService";
+import { Guest } from "../../entities/guest";
 
-class CreateSalesController {
+
+class CreateReservationController {
   async handle(request: Request, response: Response) {
-    const { date, qtd, price, product, client, total  } = request.body;
-    
-   const sale = 
+    const { datecheckIn, datecheckOut, noShow, qntAdultos, qntCriancas } = request.body;
+
+   const reservation = 
    {
-      date,
-      qtd,
-      price,
-      product,
-      client,
-      total
+      datecheckIn: datecheckIn,
+      datecheckOut: datecheckOut,
+      noShow: noShow,
+      qntAdultos: qntAdultos,
+      qntCriancas: qntCriancas,
+      Guest: Guest,
+      room: 
     }; 
-    response.json({message:"Venda cadastrada!"});
+    response.json({message:"Reserva cadastrada!"});
   }
 }
-export { CreateSalesController };
+export { CreateReservationController };

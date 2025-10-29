@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { IProductRequest } from "../../Interface/IProductInterface";
-import { ProductRepositories } from "../../repository/ProductRepositories";
+import { ProductRepositories } from "../../repository/RoomRepositories";
 
 class UpdateProductService {
     async execute ({id, name, category, desc, price}: IProductRequest){

@@ -22,7 +22,7 @@ import { AutenticationController } from "./controller/Autentication/Autenticatio
 // import { UpdateProductController } from "./controller/books/UpdateProductController";
 // import { DeleteProductController } from "./controller/books/DeleteProductController";
 
-// Clients
+// Guest
 import { CreateGuestController } from "./controller/guest/CreateGuestController";
 import { ListGuestController } from "./controller/guest/ListGuestController";
 import { UpdateGuestController } from "./controller/guest/UpdateGuestController";
